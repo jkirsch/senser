@@ -1,4 +1,10 @@
 language: java
+sudo: true
+
+# This is needed to link against the correct opencv
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get -qq install libstdc++6:i386 libgcc1:i386 zlib1g:i386 libncurses5:i386 libsdl1.2debian:i386 libv4l-dev
 
 jdk:
   - oraclejdk8
