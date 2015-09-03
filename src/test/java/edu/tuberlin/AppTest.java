@@ -31,7 +31,7 @@ public class AppTest {
 
         VideoCapture videoCapture = new VideoCapture(pathToVideo);
 
-        //Assert.assertTrue("Cannot access video source: " + pathToVideo, videoCapture.isOpened());
+        Assert.assertTrue("Cannot access video source: " + pathToVideo, videoCapture.isOpened());
 
         Mat image = new Mat();
 
