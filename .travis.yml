@@ -1,9 +1,14 @@
 language: java
 sudo: true
 
+addons:
+  apt:
+    sources: [ 'ubuntu-toolchain-r-test']
+    packages: ['libstdc++6']
+
 # This is needed to link against the correct opencv
 before_install:
-  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test  -y
   - sudo apt-get -qq update
   - sudo apt-get -qq install gcc-4.9
   - sudo apt-get -qq upgrade libstdc++6
