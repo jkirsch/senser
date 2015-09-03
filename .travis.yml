@@ -9,9 +9,10 @@ addons:
 # This is needed to link against the correct opencv
 before_install:
   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-  - sudo apt-get -y -qq update
-  - sudo apt-get -y -qq install -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" gcc-4.9
-  - sudo apt-get -y -qq upgrade -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" libstdc++6
+  - sudo apt-get -qq update
+  - sudo apt-get install -yqq g++-4.9;
+#  - sudo apt-get -yq install -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" gcc-4.9
+#  - sudo apt-get -yqq upgrade -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" libstdc++6
 
 jdk:
   - oraclejdk8
