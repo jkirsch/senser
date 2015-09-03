@@ -8,13 +8,19 @@
     "AngularJS-Toaster": "~0.4.15",
     "bootstrap": "~3.3.5",
     "sockjs": "~0.3.4",
-    "stomp-websocket": "~2.3.4"
+    "stomp-websocket": "~2.3.4",
+    "zodiac": "https://github.com/indus/zodiac.git"
   },
   "overrides": {
     "stomp-websocket": {
       "main": [
         "lib/stomp.js"
-      ]
+      ],
+      "zodiac": {
+        "main": [
+          "zodiac.js"
+        ]
+      }
     }
   }
 }

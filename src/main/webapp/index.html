@@ -29,6 +29,7 @@
     <script src="lib/AngularJS-Toaster/toaster.js"></script>
     <script src="lib/sockjs/sockjs.js"></script>
     <script src="lib/stomp-websocket/lib/stomp.js"></script>
+    <script src="lib/zodiac/zodiac.js"></script>
     <!-- endbower -->
 
     <!-- your app's js -->
@@ -36,9 +37,12 @@
     <script src="js/app.js"></script>
     <script src="js/controller.js"></script>
     <script src="js/services.js"></script>
+    <script src="js/directive.js"></script>
     <!-- endbuild -->
 
 <body ng-app="stream">
+
+<zodiac></zodiac>
 
 <div class="container" ng-controller="StreamController">
     <toaster-container></toaster-container>

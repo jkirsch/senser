@@ -8,10 +8,10 @@ addons:
 
 # This is needed to link against the correct opencv
 before_install:
-  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test  -y
-  - sudo apt-get -qq update
-  - sudo apt-get -qq install gcc-4.9 -y
-  - sudo apt-get -qq upgrade libstdc++6 -y
+  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+  - sudo apt-get -y -qq update
+  - sudo apt-get -y -qq install gcc-4.9
+  - sudo apt-get -y -qq upgrade libstdc++6
 
 jdk:
   - oraclejdk8
