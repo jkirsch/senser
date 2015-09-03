@@ -2,8 +2,8 @@ package edu.tuberlin;
 
 
 import com.google.common.io.Resources;
-import org.bytedeco.javacpp.opencv_core.Mat;
-import org.bytedeco.javacpp.opencv_highgui.VideoCapture;
+import org.bytedeco.javacv.FFmpegFrameGrabber;
+import org.bytedeco.javacv.Frame;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -25,25 +25,28 @@ public class AppTest {
     @Test
     public void testReadVideo() throws Exception {
 
-        String pathToVideo = new File(Resources.getResource("samples/SampleVideo_720x480_1mb.mp4").getFile()).getAbsolutePath();
+        File file = new File(Resources.getResource("samples/SampleVideo_720x480_1mb.mp4").getFile());
+        Assert.assertTrue("File exists: " + file, file.exists());
 
+        String pathToVideo = file.getAbsolutePath();
         LOG.info("reading {}", pathToVideo);
 
-        VideoCapture videoCapture = new VideoCapture(pathToVideo);
-
-        Assert.assertTrue("Cannot access video source: " + pathToVideo, videoCapture.isOpened());
-
-        Mat image = new Mat();
+        FFmpegFrameGrabber grabber = new FFmpegFrameGrabber(pathToVideo);
+        grabber.start();
 
         int frames = 0;
 
-        while (videoCapture.read(image)) {
+        Frame frame;
+        do {
+            frame = grabber.grabFrame();
             frames++;
-        }
+        } while (frame != null);
 
+
+        LOG.info("read {} frames", frames);
         Assert.assertThat(frames, is(greaterThan(10)));
 
-        videoCapture.release();
+        grabber.stop();
 
     }
 
