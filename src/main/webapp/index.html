@@ -1,0 +1,57 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Stats</title>
+
+    <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+
+    <!-- bower:css -->
+    <link rel="stylesheet" href="lib/angular-chart.js/dist/angular-chart.css" />
+    <link rel="stylesheet" href="lib/AngularJS-Toaster/toaster.css" />
+    <!-- endbower -->
+
+    <!-- build:css2 styles/main.css -->
+    <link rel="stylesheet" type="text/css" href="css/app.css"/>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css"/>
+    <!-- endbuild -->
+
+    <!-- bower:js -->
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-animate/angular-animate.js"></script>
+    <script src="lib/Chart.js/Chart.js"></script>
+    <script src="lib/angular-chart.js/dist/angular-chart.js"></script>
+    <script src="lib/AngularJS-Toaster/toaster.js"></script>
+    <script src="lib/sockjs/sockjs.js"></script>
+    <script src="lib/stomp-websocket/lib/stomp.js"></script>
+    <!-- endbower -->
+
+    <!-- your app's js -->
+    <!-- build:js2 scripts/scripts.js -->
+    <script src="js/app.js"></script>
+    <script src="js/controller.js"></script>
+    <script src="js/services.js"></script>
+    <!-- endbuild -->
+
+<body ng-app="stream">
+
+<div class="container" ng-controller="StreamController">
+    <toaster-container></toaster-container>
+
+    <div class="row">
+        <h3>Stream Information</h3>
+    </div>
+
+    <div class="row">
+        <canvas id="line" class="chart chart-line" chart-data="data"
+                chart-labels="labels" chart-legend="true" chart-series="series" chart-options="options">
+        </canvas>
+    </div>
+</div>
+
+</body>

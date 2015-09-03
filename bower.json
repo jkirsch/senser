@@ -1,0 +1,20 @@
+{
+  "name": "stream-sample",
+  "version": "0.0.1-SNAPSHOT",
+  "dependencies": {
+    "angular": "~1.4.5",
+    "angular-animate": "~1.4.5",
+    "angular-chart.js": "~0.8.1",
+    "AngularJS-Toaster": "~0.4.15",
+    "bootstrap": "~3.3.5",
+    "sockjs": "~0.3.4",
+    "stomp-websocket": "~2.3.4"
+  },
+  "overrides": {
+    "stomp-websocket": {
+      "main": [
+        "lib/stomp.js"
+      ]
+    }
+  }
+}
