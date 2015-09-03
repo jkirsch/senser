@@ -10,8 +10,8 @@ addons:
 before_install:
   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test  -y
   - sudo apt-get -qq update
-  - sudo apt-get -qq install gcc-4.9
-  - sudo apt-get -qq upgrade libstdc++6
+  - sudo apt-get -qq install gcc-4.9 -y
+  - sudo apt-get -qq upgrade libstdc++6 -y
 
 jdk:
   - oraclejdk8
