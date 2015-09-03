@@ -4,15 +4,8 @@ sudo: true
 addons:
   apt:
     sources: [ 'ubuntu-toolchain-r-test']
-    packages: ['libstdc++6']
-
-# This is needed to link against the correct opencv
-before_install:
-  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-  - sudo apt-get -qq update
-  - sudo apt-get install -yqq g++-4.9 libv4l-dev
-#  - sudo apt-get -yq install -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" gcc-4.9
-#  - sudo apt-get -yqq upgrade -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" libstdc++6
+    # This is needed to link against the correct opencv
+    packages: ['libstdc++6','g++-4.9','libv4l-dev']
 
 jdk:
   - oraclejdk8
