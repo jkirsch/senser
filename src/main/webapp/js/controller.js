@@ -19,6 +19,10 @@ angular.module('stream.controllers', ['stream.services', 'toaster'])
         datasetStrokeWidth: 0.5
     };
 
+    // load list of tracked terms
+    myService.trackedTerms().then(function(d) {
+        $scope.trackedTerms = d;
+    });
 
     var initialConnect = function(frame) {
           toaster.info("Info","Now Reading Messages");

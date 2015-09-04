@@ -2,7 +2,10 @@ package edu.tuberlin.senser.images.web.controller;
 
 import edu.tuberlin.senser.images.domain.SimpleMessage;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.messaging.core.MessageSendingOperations;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,12 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/controller")
 public class WebController {
 
+    private static final Logger LOG = LoggerFactory.getLogger(WebController.class);
+
     @Autowired
     private MessageSendingOperations<String> messagingTemplate;
 
     @JmsListener(destination = "output")
     public void receiveMessage(String message) {
-        System.out.println("Received <" + message + ">");
+
+        LOG.info("Received > {} <", message);
 
         String[] split = message.split(",");
 
@@ -35,10 +41,12 @@ public class WebController {
 
     }
 
+    @Value("${twitter.trackedTerms}")
+    private String[] trackedTerms;
 
-    @RequestMapping(value = "/test")
-    public String test() {
-        return "Hello World";
+    @RequestMapping(value = "/trackedTerms")
+    public String[] keywords() {
+        return trackedTerms;
     }
 
 

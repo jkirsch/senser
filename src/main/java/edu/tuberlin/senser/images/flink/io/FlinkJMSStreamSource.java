@@ -3,12 +3,16 @@ package edu.tuberlin.senser.images.flink.io;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.source.RichSourceFunction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.jms.*;
 
 /**
  */
 public class FlinkJMSStreamSource extends RichSourceFunction<String> {
+
+    private static final Logger LOG = LoggerFactory.getLogger(FlinkJMSStreamSource.class);
 
     private transient volatile boolean running;
 
@@ -44,21 +48,29 @@ public class FlinkJMSStreamSource extends RichSourceFunction<String> {
     }
 
     @Override
-    public void run(SourceContext<String> ctx) throws Exception {
+    public void run(SourceContext<String> ctx) {
         // this source never completes
 
         while (running) {
 
-            // Wait for a message
-            Message message = consumer.receive(1000);
-
-            if (message instanceof TextMessage) {
-                TextMessage textMessage = (TextMessage) message;
-                String text = textMessage.getText();
-                ctx.collect(text);
-            } else {
+            try {
+                // Wait for a message
+                Message message = consumer.receive(1000);
+                if (message instanceof TextMessage) {
+                    TextMessage textMessage = (TextMessage) message;
+                    String text = textMessage.getText();
+                    ctx.collect(text);
+                } else {
+                }
+            } catch (JMSException e) {
+                LOG.error(e.getLocalizedMessage());
+                running = false;
             }
-
+        }
+        try {
+            close();
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
         }
 
     }
@@ -71,7 +83,7 @@ public class FlinkJMSStreamSource extends RichSourceFunction<String> {
 
     @Override
     public void close() throws Exception {
-        super.close();
+        LOG.info("Closing");
         try {
             connection.close();
         } catch (JMSException e) {

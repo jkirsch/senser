@@ -1,8 +1,9 @@
  __________________________
-<   Video Scanner Project  >
+<   ${AnsiColor.BRIGHT_RED}Video Scanner Project${AnsiColor.DEFAULT}  >
  --------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
+         _[]_/____\__n_
+        |_____.--.__()_|
+        |LI  //${AnsiColor.BRIGHT_RED}#${AnsiColor.DEFAULT} \\    |
+        |    \\__//    |
+        |     '--'     |
+        '--------------'

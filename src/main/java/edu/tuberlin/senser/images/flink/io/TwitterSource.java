@@ -1,7 +1,6 @@
 package edu.tuberlin.senser.images.flink.io;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Lists;
 import com.twitter.hbc.ClientBuilder;
 import com.twitter.hbc.core.Client;
 import com.twitter.hbc.core.Constants;
@@ -22,8 +21,9 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.io.IOException;
-import java.util.List;
+import java.util.Arrays;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -49,12 +49,22 @@ public class TwitterSource implements Runnable {
     @NotBlank
     private String secret;
 
+    private String[] trackedTerms;
+
+    private Client hosebirdClient;
+    private transient volatile boolean running = true;
+
     protected OAuth1 authenticate() {
         return new OAuth1(consumerKey, consumerSecret, token, secret);
     }
 
+
+
     @Override
     public void run() {
+
+        LOG.info("Starting twitter listener, with keywords {} ", Arrays.toString(trackedTerms));
+
         /** Set up your blocking queues: Be sure to size these properly based on expected TPS of your stream */
         BlockingQueue<String> msgQueue = new LinkedBlockingQueue<String>(100000);
         BlockingQueue<Event> eventQueue = new LinkedBlockingQueue<Event>(1000);
@@ -63,8 +73,7 @@ public class TwitterSource implements Runnable {
         Hosts hosebirdHosts = new HttpHosts(Constants.STREAM_HOST);
         StatusesFilterEndpoint hosebirdEndpoint = new StatusesFilterEndpoint();
         // Optional: set up some followings and track terms
-        List<String> terms = Lists.newArrayList("berlin");
-        hosebirdEndpoint.trackTerms(terms);
+        hosebirdEndpoint.trackTerms(Arrays.asList(trackedTerms));
 
 
         // These secrets should be read from a config file
@@ -78,16 +87,15 @@ public class TwitterSource implements Runnable {
                 .processor(new StringDelimitedProcessor(msgQueue))
                 .eventMessageQueue(eventQueue);                          // optional: use this if you want to process client events
 
-        Client hosebirdClient = builder.build();
+        hosebirdClient = builder.build();
         // Attempts to establish a connection.
         hosebirdClient.connect();
 
         // on a different thread, or multiple different threads....
-        while (!hosebirdClient.isDone()) {
-            String msg = null;
+        while (running && !hosebirdClient.isDone()) {
+            ;
             try {
-                msg = msgQueue.take();
-
+                String msg = msgQueue.take();
                 Tweet tweet = mapper.readValue(msg, Tweet.class);
 
                 //jmsTemplate.convertAndSend("input", tweet.text);
@@ -110,15 +118,24 @@ public class TwitterSource implements Runnable {
 
 
             } catch (InterruptedException | IOException e) {
-                e.printStackTrace();
+                running = false;
+                LOG.error(e.getMessage());
             }
         }
+
+        LOG.info("Done listening for twitter messages");
 
     }
 
     @PostConstruct
     private void start() {
         new Thread(this).start();
+    }
+
+    @PreDestroy
+    public void cleanUp() throws Exception {
+        LOG.info("Stopping twitter client");
+        hosebirdClient.stop();
     }
 
 
@@ -136,5 +153,9 @@ public class TwitterSource implements Runnable {
 
     public void setSecret(String secret) {
         this.secret = secret;
+    }
+
+    public void setTrackedTerms(String[] trackedTerms) {
+        this.trackedTerms = trackedTerms;
     }
 }
