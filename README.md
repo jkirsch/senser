@@ -7,7 +7,7 @@ For some Fun
 * edu.tuberlin.senser.images.facedetection.video.WatchTV
 * edu.tuberlin.senser.images.facedetection.video.FaceRecognizerInVideo
 
-For twitter
+For twitter, set `twitter.enabled=true`
 
 provide credentials in
 
@@ -24,10 +24,15 @@ select keywords in
 
 `src/main/resources/application.propertie`
 
+
+first build
+
+    mvn compile -P generate-frontend
+
 start
 
     mvn spring-boot:run
 
   starts `edu.tuberlin.senser.images.MainApp`
 
-Visit http://localhost:8080/
+Visit <http://localhost:8080/>

@@ -248,6 +248,7 @@
         <profile>
             <id>generate-frontend</id>
             <activation>
+                <activeByDefault>false</activeByDefault>
                 <property>
                     <name>env.TRAVIS</name>
                     <value>true</value>
@@ -267,7 +268,7 @@
                                 </goals>
                                 <configuration>
                                     <nodeVersion>v0.12.7</nodeVersion>
-                                    <npmVersion>2.14.1</npmVersion>
+                                    <npmVersion>2.14.2</npmVersion>
                                 </configuration>
                             </execution>
                             <execution>
