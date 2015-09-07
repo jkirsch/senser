@@ -8,6 +8,7 @@ addons:
     packages:
       - gcc-4.8
       - g++-4.8
+      - libstdc++6
 
 # This is needed to link against the correct gcc binaries
 before_install:
