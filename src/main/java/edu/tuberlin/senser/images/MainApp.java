@@ -1,8 +1,8 @@
 package edu.tuberlin.senser.images;
 
 import edu.tuberlin.senser.images.flink.StreamExample;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.jms.annotation.EnableJms;
 
@@ -17,7 +17,9 @@ public class MainApp {
         System.setProperty("hawtio.authenticationEnabled", "false");
 
         // Launch the application
-        final ConfigurableApplicationContext context = SpringApplication.run(MainApp.class, args);
+        SpringApplicationBuilder builder = new SpringApplicationBuilder(MainApp.class);
+
+        final ConfigurableApplicationContext context = builder.headless(false).run(args);
 
         // start
         new Thread(new Runnable() {

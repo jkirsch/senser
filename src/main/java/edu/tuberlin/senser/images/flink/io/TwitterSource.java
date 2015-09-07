@@ -16,6 +16,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
@@ -30,6 +31,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  */
 @Component
+@ConditionalOnProperty(havingValue="true", prefix = "twitter", name = "enabled")
 @ConfigurationProperties(locations = "${twitter.authfile}", ignoreUnknownFields = true, prefix = "twitter")
 public class TwitterSource implements Runnable {
 

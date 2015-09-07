@@ -44,9 +44,12 @@ public class WebController {
     @Value("${twitter.trackedTerms}")
     private String[] trackedTerms;
 
+    @Value("${twitter.enabled}")
+    private boolean trackTwitter;
+
     @RequestMapping(value = "/trackedTerms")
     public String[] keywords() {
-        return trackedTerms;
+        return trackTwitter?trackedTerms:new String[]{"Tracking Faces in Live Video"};
     }
 
 
