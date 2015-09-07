@@ -9,6 +9,7 @@ addons:
       - gcc-4.8
       - g++-4.8
       - ubuntu-restricted-extras
+      - libv4l-dev
 
 # This is needed to link against the correct gcc binaries
 #before_install:
