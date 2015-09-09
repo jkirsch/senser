@@ -2,7 +2,7 @@
   "directory": "src/main/webapp/lib",
   "analytics": false,
   "scripts": {
-    "postinstall": "node_modules/.bin/wiredep -s src/main/webapp/index.html -e jquery"
+    "postinstall": "wiredep -s src/main/webapp/index.html -e jquery"
   }
 
 }

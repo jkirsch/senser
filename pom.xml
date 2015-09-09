@@ -8,7 +8,6 @@
     <packaging>jar</packaging>
 
     <name>Video Processor</name>
-    <url>http://maven.apache.org</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -69,7 +68,6 @@
             <artifactId>javacv</artifactId>
             <version>${javacv.version}</version>
         </dependency>
-
 
         <dependency>
             <groupId>org.bytedeco.javacpp-presets</groupId>
