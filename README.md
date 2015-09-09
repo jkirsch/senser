@@ -5,7 +5,6 @@ Demo Project opencv + Flink streaming
 For some Fun
 
 * edu.tuberlin.senser.images.facedetection.video.WatchTV
-* edu.tuberlin.senser.images.facedetection.video.FaceRecognizerInVideo
 
 For twitter, set `twitter.enabled=true`
 

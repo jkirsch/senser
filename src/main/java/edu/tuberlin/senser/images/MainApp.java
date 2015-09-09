@@ -34,15 +34,6 @@ public class MainApp {
         }).start();
 
 
-     //   JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
-
-//        while (true) {
-            //jmsTemplate.convertAndSend("input", "Hello");
-            //jmsTemplate.convertAndSend("input", "Hello World");
-        //}
-
-
-
     }
 }
 
