@@ -309,7 +309,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>1.2.5.RELEASE</version>
+                <version>1.2.6.RELEASE</version>
                 <configuration>
                     <mainClass>${start-class}</mainClass>
                 </configuration>
@@ -317,7 +317,7 @@
                     <dependency>
                         <groupId>org.springframework</groupId>
                         <artifactId>springloaded</artifactId>
-                        <version>1.2.3.RELEASE</version>
+                        <version>1.2.4.RELEASE</version>
                     </dependency>
                 </dependencies>
             </plugin>

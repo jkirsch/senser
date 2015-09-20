@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<p th:text="'Perons: ' + ${person.name} + '!'" />
+<p th:text="'Person: ' + ${person.name} + '!'" />
 
 <tr th:each="image : ${person.images}">
     <img th:src="*{'data:image/jpg;base64,'+image.getAsBase64()}" alt="Person" />

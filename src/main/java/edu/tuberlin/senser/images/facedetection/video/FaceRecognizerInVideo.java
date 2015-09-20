@@ -57,9 +57,9 @@ public class FaceRecognizerInVideo implements Runnable {
     PersonService personService;
 
     //  Stream size
-    //String videoFileName = "http://zdf_hds_de-f.akamaihd.net/i/de14_v1@147090/index_1456_av-b.m3u8?sd=10&rebase=on";
+    String videoFileName = "http://zdf_hds_de-f.akamaihd.net/i/de14_v1@147090/index_1456_av-b.m3u8?sd=10&rebase=on";
     // 480x272
-    String videoFileName = "http://zdf_hds_de-f.akamaihd.net/i/de14_v1@147090/index_436_av-p.m3u8?sd=10&rebase=on";
+    //String videoFileName = "http://zdf_hds_de-f.akamaihd.net/i/de14_v1@147090/index_436_av-p.m3u8?sd=10&rebase=on";
     private OpenCVFrameConverter.ToMat converterToMat;
     private CascadeClassifier face_cascade;
 
