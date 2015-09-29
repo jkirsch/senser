@@ -18,8 +18,6 @@ public class ImageController {
     @RequestMapping("/images/{id}")
     public String greeting(@PathVariable("id") int id, Model model) {
 
-        System.out.println(id);
-
         model.addAttribute("person", personRepository.findOne(id));
         return "faces";
     }

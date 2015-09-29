@@ -100,7 +100,9 @@ public class TwitterSource implements Runnable {
                 String msg = msgQueue.take();
                 Tweet tweet = mapper.readValue(msg, Tweet.class);
 
-                //jmsTemplate.convertAndSend("input", tweet.text);
+/*                if (!StringUtils.isEmpty(tweet.text)) {
+                    jmsTemplate.convertAndSend("input", tweet.text);
+                }*/
 
                 // Publish the language
                 jmsTemplate.convertAndSend("input", tweet.lang);

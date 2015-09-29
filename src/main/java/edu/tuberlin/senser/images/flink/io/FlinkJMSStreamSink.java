@@ -4,14 +4,12 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
-import org.apache.flink.streaming.api.windowing.StreamWindow;
 
 import javax.jms.*;
-import java.util.function.Consumer;
 
 /**
  */
-public class FlinkJMSStreamSink extends RichSinkFunction<StreamWindow<Tuple2<String, Integer>>> {
+public class FlinkJMSStreamSink extends RichSinkFunction<Tuple2<String, Integer>> {
 
     private transient volatile boolean running;
 
@@ -56,6 +54,7 @@ public class FlinkJMSStreamSink extends RichSinkFunction<StreamWindow<Tuple2<Str
 
     @Override
     public void close() throws Exception {
+        running = false;
         connection.close();
     }
 
@@ -65,19 +64,8 @@ public class FlinkJMSStreamSink extends RichSinkFunction<StreamWindow<Tuple2<Str
     }
 
     @Override
-    public void invoke(StreamWindow<Tuple2<String, Integer>> data) throws Exception {
-
-
-        data.forEach(new Consumer<Tuple2<String, Integer>>() {
-            @Override
-            public void accept(Tuple2<String, Integer> stringIntegerTuple2) {
-                try {
-                    invoke(stringIntegerTuple2.toString());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
+    public void invoke(Tuple2<String, Integer> value) throws Exception {
+        textMessage.setText(value.toString());
+        producer.send(destination, textMessage);
     }
 }

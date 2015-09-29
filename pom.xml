@@ -18,7 +18,7 @@
         <jdkLevel>1.8</jdkLevel>
 
         <spring.boot.version>1.3.0.M5</spring.boot.version>
-        <hawtio.version>2.0.0</hawtio.version>
+        <hawtio.version>1.4.53</hawtio.version>
 
         <start-class>edu.tuberlin.senser.images.MainApp</start-class>
 
