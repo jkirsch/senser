@@ -29,6 +29,8 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
+ * Settings are automatically loaded from the location specified in
+ * twitter.authfile
  */
 @Component
 @ConditionalOnProperty(havingValue="true", prefix = "twitter", name = "enabled")
@@ -95,7 +97,7 @@ public class TwitterSource implements Runnable {
 
         // on a different thread, or multiple different threads....
         while (running && !hosebirdClient.isDone()) {
-            ;
+
             try {
                 String msg = msgQueue.take();
                 Tweet tweet = mapper.readValue(msg, Tweet.class);

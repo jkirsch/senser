@@ -232,6 +232,13 @@ public class FaceRecognizerInVideo implements Runnable {
 
         new Thread(faceRecognizerInVideo).start();
 
+        faceRecognizerInVideo.personService = new PersonService() {
+            @Override
+            public String registerImage(int personID, Mat face_resized, int counter, double confidence) {
+                return "Unknown";
+            }
+        };
+
         FaceRecognizerInVideo.waitForEnter();
         faceRecognizerInVideo.stop();
 
