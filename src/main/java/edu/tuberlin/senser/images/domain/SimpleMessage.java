@@ -1,6 +1,7 @@
 package edu.tuberlin.senser.images.domain;
 
 /**
+ * Value Holder Class.
  */
 public class SimpleMessage {
 
@@ -21,5 +22,13 @@ public class SimpleMessage {
 
     public int getCount() {
         return count;
+    }
+
+    @Override
+    public String toString() {
+        return "SimpleMessage{" +
+                "name='" + name + '\'' +
+                ", count=" + count +
+                '}';
     }
 }

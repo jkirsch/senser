@@ -1,11 +1,14 @@
 package edu.tuberlin.senser.images.flink.io;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.tuberlin.senser.images.domain.SimpleMessage;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
 
 import javax.jms.*;
+import java.io.StringWriter;
 
 /**
  */
@@ -19,6 +22,7 @@ public class FlinkJMSStreamSink extends RichSinkFunction<Tuple2<String, Integer>
     private TextMessage textMessage;
 
     private final String outputQueue;
+    private final ObjectMapper mapper = new ObjectMapper();
 
     public FlinkJMSStreamSink(String outputQueue) {
         this.outputQueue = outputQueue;
@@ -58,14 +62,14 @@ public class FlinkJMSStreamSink extends RichSinkFunction<Tuple2<String, Integer>
         connection.close();
     }
 
-    public void invoke(String string) throws Exception {
-        textMessage.setText(string);
-        producer.send(destination, textMessage);
-    }
-
     @Override
     public void invoke(Tuple2<String, Integer> value) throws Exception {
-        textMessage.setText(value.toString());
+
+        SimpleMessage simpleMessage = new SimpleMessage(value.f0, value.f1);
+        StringWriter stringWriter = new StringWriter();
+        mapper.writeValue(stringWriter, simpleMessage);
+        textMessage.setText(stringWriter.toString());
+
         producer.send(destination, textMessage);
     }
 }

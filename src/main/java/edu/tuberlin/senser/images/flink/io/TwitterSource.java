@@ -7,11 +7,11 @@ import com.twitter.hbc.core.Constants;
 import com.twitter.hbc.core.Hosts;
 import com.twitter.hbc.core.HttpHosts;
 import com.twitter.hbc.core.endpoint.StatusesFilterEndpoint;
-import com.twitter.hbc.core.event.Event;
 import com.twitter.hbc.core.processor.StringDelimitedProcessor;
 import com.twitter.hbc.httpclient.auth.Authentication;
 import com.twitter.hbc.httpclient.auth.OAuth1;
 import edu.tuberlin.senser.images.domain.Tweet;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.NotBlank;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,14 +71,13 @@ public class TwitterSource implements Runnable {
 
         /** Set up your blocking queues: Be sure to size these properly based on expected TPS of your stream */
         BlockingQueue<String> msgQueue = new LinkedBlockingQueue<String>(100000);
-        BlockingQueue<Event> eventQueue = new LinkedBlockingQueue<Event>(1000);
+        //BlockingQueue<Event> eventQueue = new LinkedBlockingQueue<Event>(1000);
 
         /** Declare the host you want to connect to, the endpoint, and authentication (basic auth or oauth) */
         Hosts hosebirdHosts = new HttpHosts(Constants.STREAM_HOST);
         StatusesFilterEndpoint hosebirdEndpoint = new StatusesFilterEndpoint();
         // Optional: set up some followings and track terms
         hosebirdEndpoint.trackTerms(Arrays.asList(trackedTerms));
-
 
         // These secrets should be read from a config file
         Authentication hosebirdAuth = authenticate();
@@ -88,8 +87,8 @@ public class TwitterSource implements Runnable {
                 .hosts(hosebirdHosts)
                 .authentication(hosebirdAuth)
                 .endpoint(hosebirdEndpoint)
-                .processor(new StringDelimitedProcessor(msgQueue))
-                .eventMessageQueue(eventQueue);                          // optional: use this if you want to process client events
+                .processor(new StringDelimitedProcessor(msgQueue));
+                //.eventMessageQueue(eventQueue);                          // optional: use this if you want to process client events
 
         hosebirdClient = builder.build();
         // Attempts to establish a connection.
@@ -102,12 +101,26 @@ public class TwitterSource implements Runnable {
                 String msg = msgQueue.take();
                 Tweet tweet = mapper.readValue(msg, Tweet.class);
 
-/*                if (!StringUtils.isEmpty(tweet.text)) {
+                //System.out.println(msg);
+
+                if(tweet.coordinates != null) {
+                    System.out.println(msg);
+                }
+
+                if (!StringUtils.isEmpty(tweet.text)) {
                     jmsTemplate.convertAndSend("input", tweet.text);
+                }
+
+                // publish hashtags
+/*                if (tweet.entities != null) {
+
+                    for (Tweet.HashTag hashtag : tweet.entities.hashtags) {
+                        jmsTemplate.convertAndSend("input", hashtag.text);
+                    }
+
                 }*/
 
-                // Publish the language
-                jmsTemplate.convertAndSend("input", tweet.lang);
+
 
 /*
                 if (tweet.entities != null) {
