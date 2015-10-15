@@ -12,11 +12,9 @@ addons:
       - gcc-4.9
       - g++-4.9
       - libstdc++6
-      - libv4l-dev
       - libxvidcore4
       - x264
       - libav-tools
-      - ffmpeg
 
 # This is needed to link against the correct gcc binaries
 before_install:
