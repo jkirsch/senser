@@ -1,9 +1,13 @@
-language: java
-
-# Try the trusty beta
+# gcc4.9 works only on trusty
+# use the trusty beta on travis
 sudo: required
 dist: trusty
 
+# this is a Java project
+language: java
+
+# This is needed to link against the correct gcc binaries
+# we update gcc and thus pull on listc++6, as opencv is build against taht
 addons:
   apt:
     sources:
@@ -16,15 +20,6 @@ addons:
       - x264
       - libav-tools
 
-# This is needed to link against the correct gcc binaries
-before_install:
-# packages: ['libstdc++6']
-#  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-#  - sudo apt-get -qq update
-#   - sudo apt-get install -yqq libv4l-dev libxvidcore4 x264 libav-tools ffmpeg
-#    - sudo apt-get install -yqq g++-4.9 libv4l-dev ubuntu-restricted-extras libxvidcore4 x264 libav-tools ffmpeg
-#  - sudo apt-get -yq install -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" gcc-4.9
-#  - sudo apt-get -yqq upgrade -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" libstdc++6
-
+# test on jdk7
 jdk:
-  - oraclejdk8
+  - oraclejdk7
