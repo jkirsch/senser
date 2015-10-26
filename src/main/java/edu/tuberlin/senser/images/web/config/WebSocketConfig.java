@@ -12,6 +12,9 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 
 import javax.servlet.Filter;
 
+/**
+ * This class registers the websocket handlers, which can forward messages to web clients.
+ */
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {

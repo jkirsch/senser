@@ -15,6 +15,8 @@ import java.io.IOException;
 
 
 /**
+ * This is the dynamic controller which relays live output from the message queue "output"
+ * via websocket to any listening web client.
  */
 @RestController
 @RequestMapping("/controller")

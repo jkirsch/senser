@@ -5,6 +5,7 @@ import com.google.common.io.BaseEncoding;
 import javax.persistence.*;
 
 /**
+ * A face.
  */
 @Entity
 public class FaceImage {
@@ -14,6 +15,9 @@ public class FaceImage {
     private Long id;
 
     // We mark up the byte array with a long object datatype, setting the fetch type to lazy.
+    /**
+     * This is the JPEG serialized byte array.
+     */
     @Lob
     @Basic(fetch= FetchType.EAGER) // this gets ignored anyway, but it is recommended for blobs
     protected  byte[]  imageFile;

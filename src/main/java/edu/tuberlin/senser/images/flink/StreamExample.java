@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * Flin kStream example.
  */
 public class StreamExample implements Serializable {
 
