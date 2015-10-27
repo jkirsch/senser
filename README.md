@@ -22,7 +22,7 @@ The app is arhectrated using Spring for dependency injection. `edu.tuberlin.sens
 It uses classpath scanning to find components to initialize within the same package or underneath.
 
 
-The scanning finds `edu.tuberlin.senser.images.facedetection.video.FaceRecognizerInVideo` which starts the face detection.
+The scanning finds [edu.tuberlin.senser.images.facedetection.video.FaceRecognizerInVideo](src/main/java/edu/tuberlin/senser/images/facedetection/video/FaceRecognizerInVideo.java#L108) which starts the face detection.
 It also gets via dependency injection a link to a Person Service, which is connected to an in memory database.
 
 Once a face is found, we try to recognize it, by asking the lbphFaceRecognizer
