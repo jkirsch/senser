@@ -21,9 +21,9 @@
 
         <start-class>edu.tuberlin.senser.images.MainApp</start-class>
 
-        <javacv.version>0.11</javacv.version>
-        <opencv.version>2.4.11-${javacv.version}</opencv.version>
-        <ffmpeg.version>2.6.1-${javacv.version}</ffmpeg.version>
+        <javacv.version>1.1</javacv.version>
+        <opencv.version>3.0.0-${javacv.version}</opencv.version>
+        <ffmpeg.version>2.8.1-${javacv.version}</ffmpeg.version>
 
         <flink.version>0.9.1</flink.version>
 
@@ -181,6 +181,18 @@
             </properties>
         </profile>
         <profile>
+            <id>linux-x86</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                    <arch>x86</arch>
+                </os>
+            </activation>
+            <properties>
+                <classifier>linux-x86</classifier>
+            </properties>
+        </profile>
+        <profile>
             <id>linux-x86_64</id>
             <activation>
                 <os>
@@ -277,7 +289,7 @@
                                 </goals>
                                 <configuration>
                                     <nodeVersion>v0.12.7</nodeVersion>
-                                    <npmVersion>2.14.7</npmVersion>
+                                    <npmVersion>2.14.8</npmVersion>
                                 </configuration>
                             </execution>
                             <execution>

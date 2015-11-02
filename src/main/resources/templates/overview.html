@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Faces</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css"/>
+
+</head>
+<body>
+<p class="text-muted" th:text="'I know about ' + ${count} + ' people'"/>
+
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Sample Image</th>
+            <th>Samples</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="person : ${all}">
+            <td><a th:href="@{/images/} + ${person.id}"><p th:text="${person.name}"></p></a></td>
+            <td><img th:src="*{'data:image/jpg;base64,'+person.images.iterator().next().getAsBase64()}" alt="Person"/></td>
+            <td>With <span th:text="${person.images.size()}">0</span> images</td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

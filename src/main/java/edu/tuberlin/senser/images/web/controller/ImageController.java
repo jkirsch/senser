@@ -15,10 +15,22 @@ public class ImageController {
     @Autowired
     PersonRepository personRepository;
 
+    @RequestMapping("/images")
+    public String greeting(Model model) {
+
+        // find the number of faces
+        model.addAttribute("count", personRepository.count());
+        // for each person find one face
+        model.addAttribute("all", personRepository.findAll());
+
+        return "overview";
+    }
+
     @RequestMapping("/images/{id}")
     public String greeting(@PathVariable("id") int id, Model model) {
 
         model.addAttribute("person", personRepository.findOne(id));
         return "faces";
     }
+
 }

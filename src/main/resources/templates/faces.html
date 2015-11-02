@@ -2,13 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Faces</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css"/>
+
 </head>
 <body>
-<p th:text="'Person: ' + ${person.name} + '!'" />
+<p class="text-muted" th:text="'Person: ' + ${person.name} + '!'"/>
 
 <tr th:each="image : ${person.images}">
-    <img th:src="*{'data:image/jpg;base64,'+image.getAsBase64()}" alt="Person" />
+    <img th:src="*{'data:image/jpg;base64,'+image.getAsBase64()}" alt="Person"/>
 </tr>
 
 </body>

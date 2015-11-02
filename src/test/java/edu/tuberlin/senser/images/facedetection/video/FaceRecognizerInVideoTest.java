@@ -1,13 +1,13 @@
 package edu.tuberlin.senser.images.facedetection.video;
 
-import org.bytedeco.javacpp.opencv_contrib;
 import org.bytedeco.javacpp.opencv_core;
+import org.bytedeco.javacpp.opencv_face;
 import org.junit.Test;
 
 import java.io.File;
 
-import static org.bytedeco.javacpp.opencv_contrib.createLBPHFaceRecognizer;
-import static org.bytedeco.javacpp.opencv_highgui.imread;
+import static org.bytedeco.javacpp.opencv_face.createLBPHFaceRecognizer;
+import static org.bytedeco.javacpp.opencv_imgcodecs.imread;
 import static org.bytedeco.javacpp.opencv_imgproc.*;
 
 /**
@@ -24,7 +24,7 @@ public class FaceRecognizerInVideoTest {
 
         new File(fileName).delete();
 
-        opencv_contrib.FaceRecognizer lbphFaceRecognizer = createLBPHFaceRecognizer(1, 8, 8, 8, FaceRecognizerInVideo.lbphThreshold);
+        opencv_face.LBPHFaceRecognizer lbphFaceRecognizer = createLBPHFaceRecognizer(1, 8, 8, 8, FaceRecognizerInVideo.lbphThreshold);
         //createEigenFaceRecognizer(10, lbphThreshold);
 
 

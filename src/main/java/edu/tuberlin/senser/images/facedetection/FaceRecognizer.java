@@ -9,10 +9,9 @@ import java.io.IOException;
 import java.net.URL;
 
 import static org.bytedeco.javacpp.helper.opencv_objdetect.cvHaarDetectObjects;
-import static org.bytedeco.javacpp.opencv_contrib.createLBPHFaceRecognizer;
 import static org.bytedeco.javacpp.opencv_core.*;
-import static org.bytedeco.javacpp.opencv_imgproc.CV_BGR2GRAY;
-import static org.bytedeco.javacpp.opencv_imgproc.cvCvtColor;
+import static org.bytedeco.javacpp.opencv_face.createLBPHFaceRecognizer;
+import static org.bytedeco.javacpp.opencv_imgproc.*;
 
 /**
  */
@@ -21,7 +20,7 @@ public class FaceRecognizer {
     private final opencv_core.CvMemStorage storage;
     private final OpenCVFrameConverter.ToIplImage converter;
     private final opencv_objdetect.CvHaarClassifierCascade classifier;
-    private final opencv_contrib.FaceRecognizer lbphFaceRecognizer;
+    private final opencv_face.LBPHFaceRecognizer lbphFaceRecognizer;
     //private final LBPHFaceRecognizer lbphFaceRecognizer;
 
     public FaceRecognizer() throws IOException {
@@ -76,18 +75,17 @@ public class FaceRecognizer {
             CvRect r = new CvRect(p);
 
 
-
             int predicted = 0;
             double confidence = 0;
             //int predict = lbphFaceRecognizer.predict(r, predicted, confidence);
 
             int x = r.x(), y = r.y(), w = r.width(), h = r.height();
-            cvRectangle(grabbedImage, cvPoint(x, y), cvPoint(x+w, y+h), CvScalar.RED, 1, CV_AA, 0);
+            cvRectangle(grabbedImage, cvPoint(x, y), cvPoint(x + w, y + h), CvScalar.RED, 1, CV_AA, 0);
 
             // To access or pass as argument the elements of a native array, call position() before.
-            hatPoints.position(0).x(x-w/10)   .y(y-h/10);
-            hatPoints.position(1).x(x+w*11/10).y(y-h/10);
-            hatPoints.position(2).x(x+w/2)    .y(y-h/2);
+            hatPoints.position(0).x(x - w / 10).y(y - h / 10);
+            hatPoints.position(1).x(x + w * 11 / 10).y(y - h / 10);
+            hatPoints.position(2).x(x + w / 2).y(y - h / 2);
             cvFillConvexPoly(grabbedImage, hatPoints.position(0), 3, CvScalar.GREEN, CV_AA, 0);
 
 

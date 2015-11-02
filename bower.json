@@ -5,7 +5,7 @@
     "angular": "~1.4.7",
     "angular-animate": "~1.4.7",
     "angular-chart.js": "~0.8.5",
-    "AngularJS-Toaster": "~0.4.15",
+    "AngularJS-Toaster": "~0.4.16",
     "bootstrap": "~3.3.5",
     "sockjs-client": "~1.0.3",
     "stomp-websocket": "~2.3.4",

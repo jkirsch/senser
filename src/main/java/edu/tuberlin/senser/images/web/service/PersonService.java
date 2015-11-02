@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
-import static org.bytedeco.javacpp.opencv_highgui.imencode;
+import static org.bytedeco.javacpp.opencv_imgcodecs.imencode;
+
 
 /**
+ * This is the service class for finding faces.
  */
 @Service
 public class PersonService {

@@ -6,8 +6,8 @@ import com.google.common.io.Resources;
 import edu.tuberlin.senser.images.web.domain.Person;
 import edu.tuberlin.senser.images.web.service.PersonService;
 import org.bytedeco.javacpp.Loader;
-import org.bytedeco.javacpp.opencv_contrib;
 import org.bytedeco.javacpp.opencv_core;
+import org.bytedeco.javacpp.opencv_face;
 import org.bytedeco.javacv.CanvasFrame;
 import org.bytedeco.javacv.FFmpegFrameGrabber;
 import org.bytedeco.javacv.Frame;
@@ -26,8 +26,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-import static org.bytedeco.javacpp.opencv_contrib.createLBPHFaceRecognizer;
 import static org.bytedeco.javacpp.opencv_core.*;
+import static org.bytedeco.javacpp.opencv_face.createLBPHFaceRecognizer;
 import static org.bytedeco.javacpp.opencv_highgui.destroyAllWindows;
 import static org.bytedeco.javacpp.opencv_imgproc.*;
 import static org.bytedeco.javacpp.opencv_objdetect.CascadeClassifier;
@@ -64,7 +64,7 @@ public class FaceRecognizerInVideo implements Runnable {
     private CascadeClassifier face_cascade;
 
     private transient volatile boolean running = true;
-    private opencv_contrib.FaceRecognizer lbphFaceRecognizer;
+    private opencv_face.LBPHFaceRecognizer lbphFaceRecognizer;
 
     public static final double lbphThreshold = 100;
 
@@ -97,7 +97,7 @@ public class FaceRecognizerInVideo implements Runnable {
     @Override
     public void run() {
         try {
-            LOG.info("Stating the Face recognizer ...");
+            LOG.info("Starting the Face recognizer ...");
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -127,8 +127,7 @@ public class FaceRecognizerInVideo implements Runnable {
                 cvtColor(videoMat, videoMatGray, COLOR_BGR2GRAY);
                 equalizeHist(videoMatGray, videoMatGray);
 
-                Point p = new Point();
-                Rect faces = new Rect();
+                RectVector faces = new RectVector();
                 // Find the faces in the frame:
                 face_cascade.detectMultiScale(videoMatGray, faces);
 
@@ -138,8 +137,8 @@ public class FaceRecognizerInVideo implements Runnable {
 
                 //System.out.println(faces.limit());
 
-                for (int i = 0; i < faces.limit(); i++) {
-                    Rect face_i = faces.position(i);
+                for (int i = 0; i < faces.size(); i++) {
+                    Rect face_i = faces.get(i);
 
                     Mat face = new Mat(videoMatGray, face_i);
                     // If fisher face recognizer is used, the face need to be
