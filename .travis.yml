@@ -7,18 +7,18 @@ dist: trusty
 language: java
 
 # This is needed to link against the correct gcc binaries
-# we update gcc and thus pull on listc++6, as opencv is build against taht
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - gcc-4.9
-      - g++-4.9
-      - libstdc++6
-      - libxvidcore4
-      - x264
-      - libav-tools
+# we update gcc and thus pull on listc++6, as opencv is build against that
+#addons:
+#  apt:
+#    sources:
+#      - ubuntu-toolchain-r-test
+#    packages:
+#      - gcc-4.9
+#      - g++-4.9
+#      - libstdc++6
+#      - libxvidcore4
+#      - x264
+#      - libav-tools
 
 # test on jdk7
 jdk:
