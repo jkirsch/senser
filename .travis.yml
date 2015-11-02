@@ -6,6 +6,12 @@
 #sudo: required
 #dist: trusty
 
+cache:
+  directories:
+    - $HOME/.m2
+    - node
+    - node_modules
+
 # this is a Java project
 language: java
 
