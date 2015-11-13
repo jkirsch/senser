@@ -6,11 +6,11 @@ To start the project, run
 
 ## first build
 
-    mvn compile -P generate-frontend
+    ./mvnw compile -P generate-frontend
 
 ## start
 
-    mvn spring-boot:run
+    ./mvnw spring-boot:run
 
   starts `edu.tuberlin.senser.images.MainApp`
 
@@ -18,7 +18,7 @@ Visit <http://localhost:8080/>
 
 ### How does it work
 
-The app is arhectrated using Spring for dependency injection. `edu.tuberlin.senser.images.MainApp` is the main entry point.
+The app is orchestrated using Spring for dependency injection. `edu.tuberlin.senser.images.MainApp` is the main entry point.
 It uses classpath scanning to find components to initialize within the same package or underneath.
 
 
@@ -73,11 +73,17 @@ dynamically render the resulting page on the server.
 To start the flink streaming, the following is used `StreamExample.startFlinkStream();`
 
 
-## To just start the Face detection rnu
+## To just start the Face detection run
 
 * edu.tuberlin.senser.images.facedetection.video.WatchTV
 
-This runs face retection on live video feed.
+This runs face detection on the live video feed.
+
+
+### If you just want to see live update of the graph
+
+There is also a testmode, which just reads of text from twitter and does a wordcount on the hashtags.
+This dioes not use any video.
 
 For twitter, set `twitter.enabled=true`
 
