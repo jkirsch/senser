@@ -16,6 +16,7 @@ import org.bytedeco.javacv.OpenCVFrameConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
@@ -57,7 +58,8 @@ public class FaceRecognizerInVideo implements Runnable {
     PersonService personService;
 
     //  Stream size
-    String videoFileName = "http://zdf_hds_de-f.akamaihd.net/i/de14_v1@147090/index_1456_av-b.m3u8?sd=10&rebase=on";
+    @Value("${senser.videosource}")
+    String videoFileName;
     // 480x272
     //String videoFileName = "http://zdf_hds_de-f.akamaihd.net/i/de14_v1@147090/index_436_av-p.m3u8?sd=10&rebase=on";
     private OpenCVFrameConverter.ToMat converterToMat;
@@ -106,6 +108,8 @@ public class FaceRecognizerInVideo implements Runnable {
     }
 
     private void start() {
+
+        LOG.info("Reading from {}", videoFileName);
 
         FFmpegFrameGrabber grabber = new FFmpegFrameGrabber(videoFileName);
 
