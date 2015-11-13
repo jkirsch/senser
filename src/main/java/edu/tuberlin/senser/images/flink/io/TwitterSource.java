@@ -11,7 +11,6 @@ import com.twitter.hbc.core.processor.StringDelimitedProcessor;
 import com.twitter.hbc.httpclient.auth.Authentication;
 import com.twitter.hbc.httpclient.auth.OAuth1;
 import edu.tuberlin.senser.images.domain.Tweet;
-import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.NotBlank;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -107,18 +106,18 @@ public class TwitterSource implements Runnable {
                     System.out.println(msg);
                 }
 
-                if (!StringUtils.isEmpty(tweet.text)) {
+/*                               if (!StringUtils.isEmpty(tweet.text)) {
                     jmsTemplate.convertAndSend("input", tweet.text);
                 }
-
+*/
                 // publish hashtags
-/*                if (tweet.entities != null) {
+                if (tweet.entities != null) {
 
                     for (Tweet.HashTag hashtag : tweet.entities.hashtags) {
                         jmsTemplate.convertAndSend("input", hashtag.text);
                     }
 
-                }*/
+                }
 
 
 

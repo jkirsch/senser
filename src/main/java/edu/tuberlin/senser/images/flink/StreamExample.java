@@ -5,7 +5,7 @@ import edu.tuberlin.senser.images.flink.io.FlinkJMSStreamSource;
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.api.windowing.helper.Time;
+import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.util.Collector;
 
 import java.io.Serializable;
@@ -23,10 +23,9 @@ public class StreamExample implements Serializable {
         env
                 .addSource(new FlinkJMSStreamSource())
                 .flatMap(new Splitter())
-                .window(Time.of(5, TimeUnit.SECONDS)).every(Time.of(2, TimeUnit.SECONDS))
-                .groupBy(0)
+                .keyBy(0)
+                .timeWindow(Time.of(5, TimeUnit.SECONDS), Time.of(2, TimeUnit.SECONDS))
                 .sum(1)
-                .flatten()
                 // Now forward the result to a JMS Queue
                 .addSink(new FlinkJMSStreamSink("output"));
 
