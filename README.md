@@ -16,6 +16,11 @@ To start the project, run
 
 Visit <http://localhost:8080/>
 
+## Dependencies
+
+- You should have git on the path
+- Maven is self contained using the wrapper accessable from mvnw
+
 ### How does it work
 
 The app is orchestrated using Spring for dependency injection. `edu.tuberlin.senser.images.MainApp` is the main entry point.
