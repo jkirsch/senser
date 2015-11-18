@@ -17,7 +17,7 @@ import static org.bytedeco.javacpp.opencv_imgproc.*;
  */
 public class FaceRecognizer {
 
-    private final opencv_core.CvMemStorage storage;
+    private final CvMemStorage storage;
     private final OpenCVFrameConverter.ToIplImage converter;
     private final opencv_objdetect.CvHaarClassifierCascade classifier;
     private final opencv_face.LBPHFaceRecognizer lbphFaceRecognizer;
@@ -43,7 +43,7 @@ public class FaceRecognizer {
             System.exit(1);
         }
 
-        storage = opencv_core.CvMemStorage.create();
+        storage = CvMemStorage.create();
 
         converter = new OpenCVFrameConverter.ToIplImage();
 
@@ -52,7 +52,6 @@ public class FaceRecognizer {
     }
 
     OpenCVFrameConverter.ToIplImage openCVConverter = new OpenCVFrameConverter.ToIplImage();
-    OpenCVFrameConverter.ToMat openCVConverterToMat = new OpenCVFrameConverter.ToMat();
 
     public Frame recognize(Frame frame) {
 

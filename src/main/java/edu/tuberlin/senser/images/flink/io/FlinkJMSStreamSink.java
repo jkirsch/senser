@@ -14,12 +14,12 @@ import java.io.StringWriter;
  */
 public class FlinkJMSStreamSink extends RichSinkFunction<Tuple2<String, Integer>> {
 
-    private transient volatile boolean running;
+    private static final long serialVersionUID = 1L;
 
-    private MessageProducer producer;
-    private Connection connection;
-    private Queue destination;
-    private TextMessage textMessage;
+    private transient MessageProducer producer;
+    private transient Connection connection;
+    private transient Queue destination;
+    private transient TextMessage textMessage;
 
     private final String outputQueue;
     private final ObjectMapper mapper = new ObjectMapper();
@@ -51,14 +51,11 @@ public class FlinkJMSStreamSink extends RichSinkFunction<Tuple2<String, Integer>
 
     @Override
     public void open(Configuration parameters) throws Exception {
-        super.open(parameters);
-        running = true;
         init();
     }
 
     @Override
     public void close() throws Exception {
-        running = false;
         connection.close();
     }
 

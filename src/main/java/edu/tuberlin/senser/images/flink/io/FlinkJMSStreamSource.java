@@ -12,13 +12,14 @@ import javax.jms.*;
  */
 public class FlinkJMSStreamSource extends RichSourceFunction<String> {
 
+    private static final long serialVersionUID = 1L;
+
     private static final Logger LOG = LoggerFactory.getLogger(FlinkJMSStreamSource.class);
 
     private transient volatile boolean running;
 
-    private static SourceContext<String> source;
-    private MessageConsumer consumer;
-    private Connection connection;
+    private transient MessageConsumer consumer;
+    private transient Connection connection;
 
     private void init() throws JMSException {
         // Create a ConnectionFactory
@@ -61,6 +62,7 @@ public class FlinkJMSStreamSource extends RichSourceFunction<String> {
                     String text = textMessage.getText();
                     ctx.collect(text);
                 } else {
+                    LOG.error("Don't know what to do .. or no message");
                 }
             } catch (JMSException e) {
                 LOG.error(e.getLocalizedMessage());

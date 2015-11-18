@@ -1,12 +1,12 @@
 package edu.tuberlin.senser.images.facedetection.video;
 
+import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.io.Resources;
 import edu.tuberlin.senser.images.web.domain.Person;
 import edu.tuberlin.senser.images.web.service.PersonService;
 import org.bytedeco.javacpp.Loader;
-import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacpp.opencv_face;
 import org.bytedeco.javacv.CanvasFrame;
 import org.bytedeco.javacv.FFmpegFrameGrabber;
@@ -147,8 +147,8 @@ public class FaceRecognizerInVideo implements Runnable {
                     Mat face = new Mat(videoMatGray, face_i);
                     // If fisher face recognizer is used, the face need to be
                     // resized.
-                    opencv_core.Mat face_resized = new opencv_core.Mat();
-                    resize(face, face_resized, new opencv_core.Size(width, height),
+                    Mat face_resized = new Mat();
+                    resize(face, face_resized, new Size(width, height),
                             1.0, 1.0, INTER_CUBIC);
 
                     // Now perform the prediction, see how easy that is:
@@ -164,14 +164,14 @@ public class FaceRecognizerInVideo implements Runnable {
                     rectangle(videoMat, face_i, new Scalar(0, 255, 0, 1));
 
                     String box_text;
-                    opencv_core.Mat label;
+                    Mat label;
                     Person person;
 
                     int personID = plabel[0];
                     double confidence = pconfidence[0];
 
                     if (personID == -1) {
-                        label = new opencv_core.Mat(new int[]{++counter});
+                        label = new Mat(new int[]{++counter});
                         LOG.info("New face ... stat: {}", counter);
                     } else {
                         label = new Mat(new int[]{personID});
@@ -180,7 +180,7 @@ public class FaceRecognizerInVideo implements Runnable {
 
                     box_text = personService.registerImage(personID, face_resized, counter, confidence);
 
-                    opencv_core.MatVector images = new opencv_core.MatVector(new Mat[]{face_resized});
+                    MatVector images = new MatVector(new Mat[]{face_resized});
                     lbphFaceRecognizer.update(images, label);
 
 
@@ -252,7 +252,7 @@ public class FaceRecognizerInVideo implements Runnable {
 
         System.out.println("\n\nPress ENTER to continue..");
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in, Charsets.UTF_8.name());
         scanner.nextLine();
 
     }

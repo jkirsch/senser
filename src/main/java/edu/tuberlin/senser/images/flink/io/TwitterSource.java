@@ -111,10 +111,10 @@ public class TwitterSource implements Runnable {
                 }
 */
                 // publish hashtags
-                if (tweet.entities != null) {
+                if (tweet.getEntities() != null) {
 
-                    for (Tweet.HashTag hashtag : tweet.entities.hashtags) {
-                        jmsTemplate.convertAndSend("input", hashtag.text);
+                    for (Tweet.HashTag hashtag : tweet.getEntities().getHashtags()) {
+                        jmsTemplate.convertAndSend("input", hashtag.getText());
                     }
 
                 }

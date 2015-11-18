@@ -14,12 +14,16 @@ public class Tweet {
 
     public Coordinate coordinates;
 
-    public TwitterEntities entities;
+    TwitterEntities entities;
 
     @JsonIgnoreProperties(ignoreUnknown = true) // so we only include ones we care about
     public static class TwitterEntities {
 
-        public List<HashTag> hashtags;
+        List<HashTag> hashtags;
+
+        public List<HashTag> getHashtags() {
+            return hashtags;
+        }
 
         @Override
         public String toString() {
@@ -31,7 +35,11 @@ public class Tweet {
 
     @JsonIgnoreProperties(ignoreUnknown = true) // so we only include ones we care about
     public static class HashTag {
-        public String text;
+        String text;
+
+        public String getText() {
+            return text;
+        }
 
         @Override
         public String toString() {
@@ -55,6 +63,10 @@ public class Tweet {
                     ", coordinates=" + Arrays.toString(coordinates) +
                     '}';
         }
+    }
+
+    public TwitterEntities getEntities() {
+        return entities;
     }
 
     @Override

@@ -83,7 +83,7 @@ public class WatchTV extends JFrame implements Runnable {
         try {
             grabber.start();
 
-            org.bytedeco.javacv.Frame frame = grabber.grab();
+            Frame frame = grabber.grab();
 
             while (frame != null) {
 
