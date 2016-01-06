@@ -5,7 +5,7 @@
   "license": "GPL",
   "dependencies": {},
   "devDependencies": {
-    "bower": "^1.6.8",
+    "bower": "^1.7.2",
     "del": "^2.1.0",
     "gulp": "^3.9.0",
     "gulp-jshint": "^1.12.0",

@@ -16,8 +16,8 @@
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
 
-        <spring.boot.version>1.3.0.RELEASE</spring.boot.version>
-        <hawtio.version>1.4.56</hawtio.version>
+        <spring.boot.version>1.3.1.RELEASE</spring.boot.version>
+        <hawtio.version>1.4.59</hawtio.version>
 
         <start-class>edu.tuberlin.senser.images.MainApp</start-class>
 
@@ -85,7 +85,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>18.0</version>
+            <version>19.0</version>
         </dependency>
 
         <dependency>
