@@ -119,12 +119,11 @@ public class FaceRecognizerInVideo implements Runnable {
 
             // process frames
 
-            Frame videoFrame = null;
             Mat videoMat = new Mat();
 
             while (running) {
-                videoFrame = grabber.grab();
-                if (videoFrame.image == null) continue;
+                Frame videoFrame = grabber.grab();
+                if (videoFrame == null || videoFrame.image == null) continue;
                 videoMat = converterToMat.convert(videoFrame);
                 Mat videoMatGray = new Mat();
                 // Convert the current frame to grayscale:
@@ -132,6 +131,7 @@ public class FaceRecognizerInVideo implements Runnable {
                 equalizeHist(videoMatGray, videoMatGray);
 
                 RectVector faces = new RectVector();
+
                 // Find the faces in the frame:
                 face_cascade.detectMultiScale(videoMatGray, faces);
 
@@ -191,6 +191,7 @@ public class FaceRecognizerInVideo implements Runnable {
                     // And now put it into the image:
                     putText(videoMat, box_text, new Point(pos_x, pos_y),
                             FONT_HERSHEY_PLAIN, 1.0, new Scalar(0, 255, 0, 2.0));
+
                 }
                 // Show the result:
                 framer.showImage(videoFrame);
@@ -215,6 +216,7 @@ public class FaceRecognizerInVideo implements Runnable {
             destroyAllWindows();
 
         } catch (Exception e) {
+            running = false;
             LOG.error("Error processing video", e);
         }
 

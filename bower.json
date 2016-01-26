@@ -2,14 +2,14 @@
   "name": "stream-sample",
   "version": "0.0.1-SNAPSHOT",
   "dependencies": {
-    "angular": "~1.4.7",
-    "angular-animate": "~1.4.7",
+    "angular": "~1.4.9",
+    "angular-animate": "~1.4.9",
     "angular-chart.js": "~0.8.8",
-    "AngularJS-Toaster": "~0.4.18",
-    "bootstrap": "~3.3.6",
+    "AngularJS-Toaster": "~1.0.0",
     "sockjs-client": "~1.0.3",
     "stomp-websocket": "~2.3.4",
-    "zodiac": "https://github.com/indus/zodiac.git"
+    "zodiac": "https://github.com/indus/zodiac.git",
+    "bootstrap": "~3.3.6"
   },
   "overrides": {
     "stomp-websocket": {

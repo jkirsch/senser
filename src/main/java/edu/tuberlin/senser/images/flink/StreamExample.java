@@ -1,5 +1,6 @@
 package edu.tuberlin.senser.images.flink;
 
+import edu.tuberlin.senser.images.flink.io.BufferedImageKryoSerializer;
 import edu.tuberlin.senser.images.flink.io.FlinkJMSStreamSink;
 import edu.tuberlin.senser.images.flink.io.FlinkJMSStreamSource;
 import org.apache.flink.api.common.functions.FlatMapFunction;
@@ -8,6 +9,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.util.Collector;
 
+import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
@@ -19,6 +21,9 @@ public class StreamExample implements Serializable {
     public static void startFlinkStream() throws Exception {
 
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
+        env.getConfig().registerTypeWithKryoSerializer(BufferedImage.class, BufferedImageKryoSerializer.class);
+
 
         env
                 .addSource(new FlinkJMSStreamSource())

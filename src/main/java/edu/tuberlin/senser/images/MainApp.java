@@ -22,7 +22,7 @@ public class MainApp {
         final ConfigurableApplicationContext context = builder.headless(false).run(args);
 
         // start
-        new Thread(new Runnable() {
+        Thread flink = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -31,7 +31,12 @@ public class MainApp {
                     e.printStackTrace();
                 }
             }
-        }).start();
+        });
+
+        flink.start();
+        flink.join();
+
+        context.close();
 
 
     }
