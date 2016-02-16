@@ -29,6 +29,6 @@ language: java
 #      - x264
 #      - libav-tools
 
-# test on jdk7
+# test on jdk8
 jdk:
-  - oraclejdk7
+  - oraclejdk8
