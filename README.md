@@ -26,9 +26,11 @@ Visit <http://localhost:8080/>
 The app is orchestrated using Spring for dependency injection. `edu.tuberlin.senser.images.MainApp` is the main entry point.
 It uses classpath scanning to find components to initialize within the same package or underneath.
 
-
 The scanning finds [edu.tuberlin.senser.images.facedetection.video.FaceRecognizerInVideo](src/main/java/edu/tuberlin/senser/images/facedetection/video/FaceRecognizerInVideo.java#L108) which starts the face detection.
 It also gets via dependency injection a link to a Person Service, which is connected to an in memory database.
+
+It reads of videos by opening the resource specified under the name `senser.videosource` in `application.properties`. 
+This can a remote resource with streaming video, or a local stired video file.
 
 Once a face is found, we try to recognize it, by asking the lbphFaceRecognizer
 
@@ -58,7 +60,9 @@ Since we store images into the database, we can also inspect them live.
 For this end a web controller is exposed as a component, `edu.tuberlin.senser.images.web.controller.ImageController` which
 listens on localhost:8080/images/{id}
 
-So if there is a persons with ID 1 found we can quickly retrieve all training samples using <https://localhost:8080/images/1> .
+Just visit <https://localhost:8080/images> to view a global view of all images.
+
+So if there is a person with ID 1 found we can quickly retrieve all training samples using <https://localhost:8080/images/1> .
 This will hit the controller, which retrieves the Person Object from the database, sets a model and forwards it to a view "faces"
 
 ```java
@@ -82,13 +86,13 @@ To start the flink streaming, the following is used `StreamExample.startFlinkStr
 
 * edu.tuberlin.senser.images.facedetection.video.WatchTV
 
-This runs face detection on the live video feed.
+This runs face detection on a live video feed.
 
 
 ### If you just want to see live update of the graph
 
-There is also a testmode, which just reads of text from twitter and does a wordcount on the hashtags.
-This dioes not use any video.
+There is also a testmode, which just reads text from twitter and does a wordcount on the hashtags.
+This does not use any video.
 
 For twitter, set `twitter.enabled=true`
 
