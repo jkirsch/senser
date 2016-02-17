@@ -27,6 +27,9 @@
 
         <flink.version>0.10.2</flink.version>
 
+        <!-- This property is set by a profile -->
+        <macoperatingsystem.prefix></macoperatingsystem.prefix>
+
     </properties>
 
     <prerequisites>
@@ -61,14 +64,14 @@
             <groupId>org.bytedeco.javacpp-presets</groupId>
             <artifactId>opencv</artifactId>
             <version>${opencv.version}</version>
-            <classifier>${os.detected.classifier}</classifier>
+            <classifier>${macoperatingsystem.prefix}${os.detected.classifier}</classifier>
         </dependency>
 
         <dependency>
             <groupId>org.bytedeco.javacpp-presets</groupId>
             <artifactId>ffmpeg</artifactId>
             <version>${ffmpeg.version}</version>
-            <classifier>${os.detected.classifier}</classifier>
+            <classifier>${macoperatingsystem.prefix}${os.detected.classifier}</classifier>
         </dependency>
 
         <dependency>
@@ -163,8 +166,21 @@
         </dependencies>
     </dependencyManagement>
 
-    <!-- Profiles are here to load the correct opencv bindings -->
     <profiles>
+
+        <profile>
+            <!-- Profile are here to load the correct opencv bindings on mac -> which is called macosx, not just osx-->
+            <id>macos</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                </os>
+            </activation>
+            <properties>
+                <macoperatingsystem.prefix>mac</macoperatingsystem.prefix>
+            </properties>
+        </profile>
+
         <profile>
             <id>development</id>
             <activation>

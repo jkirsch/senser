@@ -1,3 +1,8 @@
+# Test in linux and macos
+os:
+  - linux
+  - osx
+
 # gcc4.9 works only on trusty
 # use the trusty beta on travis
 
