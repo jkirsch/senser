@@ -49,17 +49,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jetty</artifactId>
         </dependency>
 
         <dependency>
@@ -72,14 +61,14 @@
             <groupId>org.bytedeco.javacpp-presets</groupId>
             <artifactId>opencv</artifactId>
             <version>${opencv.version}</version>
-            <classifier>${classifier}</classifier>
+            <classifier>${os.detected.classifier}</classifier>
         </dependency>
 
         <dependency>
             <groupId>org.bytedeco.javacpp-presets</groupId>
             <artifactId>ffmpeg</artifactId>
             <version>${ffmpeg.version}</version>
-            <classifier>${classifier}</classifier>
+            <classifier>${os.detected.classifier}</classifier>
         </dependency>
 
         <dependency>
@@ -176,79 +165,6 @@
 
     <!-- Profiles are here to load the correct opencv bindings -->
     <profiles>
-        <profile>
-            <id>macosx-x86_64</id>
-            <activation>
-                <os>
-                    <family>mac</family>
-                    <arch>x86_64</arch>
-                </os>
-            </activation>
-            <properties>
-                <classifier>macosx-x86_64</classifier>
-            </properties>
-        </profile>
-        <profile>
-            <id>linux-x86</id>
-            <activation>
-                <os>
-                    <family>unix</family>
-                    <arch>x86</arch>
-                </os>
-            </activation>
-            <properties>
-                <classifier>linux-x86</classifier>
-            </properties>
-        </profile>
-        <profile>
-            <id>linux-x86_64</id>
-            <activation>
-                <os>
-                    <family>unix</family>
-                    <arch>amd64</arch>
-                </os>
-            </activation>
-            <properties>
-                <classifier>linux-x86_64</classifier>
-            </properties>
-        </profile>
-        <profile>
-            <id>windows-x86_64_amd</id>
-            <activation>
-                <os>
-                    <family>windows</family>
-                    <arch>amd64</arch>
-                </os>
-            </activation>
-            <properties>
-                <classifier>windows-x86_64</classifier>
-            </properties>
-        </profile>
-        <profile>
-            <id>windows-x86_64</id>
-            <activation>
-                <os>
-                    <family>windows</family>
-                    <arch>x86_64</arch>
-                </os>
-            </activation>
-            <properties>
-                <classifier>windows-x86_64</classifier>
-            </properties>
-        </profile>
-        <profile>
-            <id>windows-x86</id>
-            <activation>
-                <os>
-                    <family>windows</family>
-                    <arch>x86</arch>
-                </os>
-            </activation>
-            <properties>
-                <classifier>windows-x86</classifier>
-            </properties>
-        </profile>
-
         <profile>
             <id>development</id>
             <activation>
@@ -400,9 +316,17 @@
                 </configuration>
             </plugin>
 
-
         </plugins>
+
+        <extensions>
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>1.4.1.Final</version>
+            </extension>
+        </extensions>
     </build>
+
 
     <reporting>
         <plugins>
