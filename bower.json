@@ -5,7 +5,7 @@
     "angular": "~1.4.9",
     "angular-animate": "~1.4.9",
     "angular-chart.js": "~0.8.8",
-    "AngularJS-Toaster": "~1.0.0",
+    "AngularJS-Toaster": "~1.2.0",
     "sockjs-client": "~1.0.3",
     "stomp-websocket": "~2.3.4",
     "zodiac": "https://github.com/indus/zodiac.git",
