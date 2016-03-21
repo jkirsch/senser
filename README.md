@@ -112,3 +112,12 @@ twitter.secret=
 select keywords in
 
 `src/main/resources/application.properties`
+
+## IDE Note
+
+If you are running on a 64 bit version. Make sure you start your IDE in 64 bit mode, otherwise the dependencies might not be resolved correctly.
+
+To determine the correct opencv platform bindings, the `os-maven-plugin` is used.
+For integration issues with your IDE, check [Issues with eclipse m2e or other ides](https://github.com/trustin/os-maven-plugin#issues-with-eclipse-m2e-or-other-ides).
+
+
