@@ -226,7 +226,8 @@
                 <activeByDefault>false</activeByDefault>
                 <property>
                     <name>env.CI</name>
-                    <value>true</value>
+                    <!--Appveyor sets CI = True, but Travis sets it to true-->
+                    <!--<value>true</value>-->
                 </property>
             </activation>
             <build>
