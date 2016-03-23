@@ -9,3 +9,5 @@ test_script:
   - ./mvnw clean install --batch-mode
 cache:
   - C:\Users\appveyor\.m2
+  - node_modules
+  - node

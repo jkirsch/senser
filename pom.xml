@@ -220,12 +220,12 @@
 
         <profile>
             <!-- Generate the frontend -->
-            <!-- when run on travis, or bower dependencies are missing -->
+            <!-- when run on travis or appveyor -->
             <id>generate-frontend</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
                 <property>
-                    <name>env.TRAVIS</name>
+                    <name>env.CI</name>
                     <value>true</value>
                 </property>
             </activation>
