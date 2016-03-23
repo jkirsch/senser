@@ -6,7 +6,7 @@ install:
 build_script:
   - ./mvnw clean package --batch-mode -DskipTests
 test_script:
-  - ./mvnw clean install --batch-mode
+  - ./mvnw clean install --batch-mode -P!generate-frontend
 cache:
   - C:\Users\appveyor\.m2
   - node_modules
