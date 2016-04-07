@@ -16,6 +16,7 @@ cache:
     - $HOME/.m2
     - node
     - node_modules
+    - src/main/webapp/lib/
 
 # this is a Java project
 language: java
