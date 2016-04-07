@@ -20,5 +20,9 @@ test_script:
   
 cache:
   - C:\Users\appveyor\.m2
-  - node_modules
-  - node
+  # node modules cache
+  - node_modules -> package.json
+  # cache node binary, clear when we update pom.xml, could indicate a new version of node
+  - node -> pom.xml
+  # Bower assets cache
+  - src/main/webapp/lib/  -> bower.json # preserve "bower assets" directory reset it if bower.json is modified
