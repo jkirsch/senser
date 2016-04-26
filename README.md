@@ -19,7 +19,7 @@ Visit <http://localhost:8080/>
 ## Dependencies
 
 - You should have git on the path
-- Maven is self contained using the wrapper accessable from mvnw
+- Maven is self contained using the wrapper accessible from mvnw
 
 ### How does it work
 
@@ -32,7 +32,7 @@ It also gets via dependency injection a link to a Person Service, which is conne
 It reads from a video or video stream by opening the resource specified under the name `senser.videosource` in `application.properties`. 
 This can be a remote resource with streaming video, or a locally stored video file.
 
-Once a face is found, we try to recognize it, by asking the lbphFaceRecognizer
+Once a face is found, we try to recognize it, by asking the `lbphFaceRecognizer`
 
 ```java
 int[] plabel = new int[1];
@@ -90,7 +90,7 @@ This runs face detection on a live video feed.
 
 ## IDE Note
 
-If you are running on a 64 bit version. Make sure you start your IDE in 64 bit mode, otherwise the dependencies might not be resolved correctly.
+If you are running on a 64 bit OS, make sure you start your IDE in 64 bit mode as well, otherwise the dependencies might not resolve correctly.
 
 To determine the correct opencv platform bindings, the `os-maven-plugin` is used.
 For integration issues with your IDE, check [Issues with eclipse m2e or other ides](https://github.com/trustin/os-maven-plugin#issues-with-eclipse-m2e-or-other-ides).

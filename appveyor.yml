@@ -13,10 +13,10 @@ environment:
 
 build_script:
   - ./mvnw --version
-  - ./mvnw clean package --batch-mode -DskipTests
+  - ./mvnw clean package -DskipTests
 
 test_script:
-  - ./mvnw clean install --batch-mode -P!generate-frontend
+  - ./mvnw clean install -P!generate-frontend
   
 cache:
   - C:\Users\appveyor\.m2
