@@ -29,8 +29,8 @@ It uses classpath scanning to find components to initialize within the same pack
 The scanning finds [edu.tuberlin.senser.images.facedetection.video.FaceRecognizerInVideo](src/main/java/edu/tuberlin/senser/images/facedetection/video/FaceRecognizerInVideo.java#L108) which starts the face detection.
 It also gets via dependency injection a link to a Person Service, which is connected to an in memory database.
 
-It reads of videos by opening the resource specified under the name `senser.videosource` in `application.properties`. 
-This can a remote resource with streaming video, or a local stired video file.
+It reads from a video or video stream by opening the resource specified under the name `senser.videosource` in `application.properties`. 
+This can be a remote resource with streaming video, or a locally stored video file.
 
 Once a face is found, we try to recognize it, by asking the lbphFaceRecognizer
 
@@ -87,31 +87,6 @@ To start the flink streaming, the following is used `StreamExample.startFlinkStr
 * edu.tuberlin.senser.images.facedetection.video.WatchTV
 
 This runs face detection on a live video feed.
-
-
-### If you just want to see live update of the graph
-
-There is also a testmode, which just reads text from twitter and does a wordcount on the hashtags.
-This does not use any video.
-
-For twitter, set `twitter.enabled=true`
-
-provide credentials in
-
-`src/main/resources/twittersource.properties`
-
-```
-twitter.consumerKey=
-twitter.consumerSecret=
-twitter.token=
-twitter.secret=
-```
-
-**:warning: !! Don't check this file in !! :warning:**
-
-select keywords in
-
-`src/main/resources/application.properties`
 
 ## IDE Note
 

@@ -10,7 +10,7 @@ var myApp = angular.module('stream.services', [
         trackedTerms: function() {
           // $http returns a promise, which has a then function, which also returns a promise
             // Return the promise to the controller
-          return $http.get('controller/trackedTerms').then(function (response) {
+          return $http.get('controller/trackinfo').then(function (response) {
               // The then function here is an opportunity to modify the response
               // We select the JSON parsed response data
               // The return value gets picked up in the controller.

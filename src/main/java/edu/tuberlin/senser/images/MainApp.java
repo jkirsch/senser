@@ -14,22 +14,17 @@ public class MainApp {
 
     public static void main(String[] args) throws Exception {
 
-        System.setProperty("hawtio.authenticationEnabled", "false");
-
         // Launch the application
         SpringApplicationBuilder builder = new SpringApplicationBuilder(MainApp.class);
 
         final ConfigurableApplicationContext context = builder.headless(false).run(args);
 
-        // start
-        Thread flink = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    StreamExample.startFlinkStream();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        // start Flink in the background
+        Thread flink = new Thread(() -> {
+            try {
+                StreamExample.startFlinkStream();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
