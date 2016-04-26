@@ -20,8 +20,8 @@ angular.module('stream.controllers', ['stream.services', 'toaster'])
     };
 
     // load list of tracked terms
-    myService.trackedTerms().then(function(d) {
-        $scope.trackedTerms = d;
+    myService.trackinfo().then(function(d) {
+        $scope.trackinfo = d;
     });
 
     var initialConnect = function(frame) {

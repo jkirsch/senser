@@ -17,7 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
@@ -38,7 +37,6 @@ import static org.bytedeco.javacpp.opencv_objdetect.CascadeClassifier;
  *
  * @author Vincent He (chinadragon0515@gmail.com)
  */
-@ConditionalOnProperty(havingValue = "false", prefix = "twitter", name = "enabled")
 @Component
 public class FaceRecognizerInVideo implements Runnable {
 

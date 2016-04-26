@@ -5,6 +5,7 @@ import edu.tuberlin.senser.images.domain.SimpleMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.messaging.core.MessageSendingOperations;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,9 +43,9 @@ public class WebController {
 
     }
 
-    @RequestMapping(value = "/trackinfo")
-    public String[] keywords() {
-        return new String[]{"Tracking Faces in Live Video"};
+    @RequestMapping(value = "/trackinfo", produces = MediaType.TEXT_PLAIN_VALUE)
+    public String keywords() {
+        return "Tracking Faces in Live Video";
     }
 
 
