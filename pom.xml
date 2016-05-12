@@ -16,7 +16,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
-        <spring.boot.version>1.3.3.RELEASE</spring.boot.version>
+        <spring.boot.version>1.3.5.RELEASE</spring.boot.version>
 
         <start-class>edu.tuberlin.senser.images.MainApp</start-class>
 
@@ -319,7 +319,7 @@
         <extensions>
             <extension>
                 <groupId>kr.motd.maven</groupId>
-                <artifactId>os-maven-plugin</artifactId>
+                    <artifactId>os-maven-plugin</artifactId>
                 <version>1.5.0.Final</version>
             </extension>
         </extensions>
