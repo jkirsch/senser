@@ -24,7 +24,7 @@
         <opencv.version>3.0.0-${javacv.version}</opencv.version>
         <ffmpeg.version>2.8.1-${javacv.version}</ffmpeg.version>
 
-        <flink.version>1.0.2</flink.version>
+        <flink.version>1.0.3</flink.version>
 
         <!-- This property is set by a profile -->
         <macoperatingsystem.prefix></macoperatingsystem.prefix>
