@@ -2,9 +2,9 @@
   "name": "stream-sample",
   "version": "0.0.1-SNAPSHOT",
   "dependencies": {
-    "angular": "~1.5.6",
-    "angular-animate": "~1.5.6",
-    "angular-chart.js": "1.0.0-alpha6",
+    "angular": "~1.5.7",
+    "angular-animate": "~1.5.7",
+    "angular-chart.js": "1.0.0-beta1",
     "AngularJS-Toaster": "~2.0.0",
     "sockjs-client": "~1.1.1",
     "stomp-websocket": "~2.3.4",
@@ -24,6 +24,6 @@
     }
   },
   "resolutions": {
-    "angular": "1.5.6"
+    "angular": "1.5.7"
   }
 }
