@@ -27,7 +27,7 @@ public class PersonService {
 
         BytePointer outputPointer = new BytePointer();
         imencode(".jpg", face_resized, outputPointer);
-        byte[] outputBuffer = new byte[outputPointer.limit()];
+        byte[] outputBuffer = new byte[(int) outputPointer.limit()];
         outputPointer.get(outputBuffer);
 
         Person person;

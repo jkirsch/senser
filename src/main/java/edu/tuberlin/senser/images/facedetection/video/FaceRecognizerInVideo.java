@@ -4,7 +4,6 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.io.Resources;
-import edu.tuberlin.senser.images.web.domain.Person;
 import edu.tuberlin.senser.images.web.service.PersonService;
 import org.bytedeco.javacpp.Loader;
 import org.bytedeco.javacpp.opencv_face;
@@ -66,7 +65,7 @@ public class FaceRecognizerInVideo implements Runnable {
     private transient volatile boolean running = true;
     private opencv_face.LBPHFaceRecognizer lbphFaceRecognizer;
 
-    public static final double lbphThreshold = 100;
+    public static final double lbphThreshold = 80;
 
     public FaceRecognizerInVideo() throws IOException {
 
@@ -151,10 +150,10 @@ public class FaceRecognizerInVideo implements Runnable {
 
                     // Now perform the prediction, see how easy that is:
 
-                    int[] plabel = new int[1];
+                    int[] plabel = {-1};
                     double[] pconfidence = new double[1];
 
-                    lbphFaceRecognizer.predict(face_resized, plabel, pconfidence);
+                    lbphFaceRecognizer.predict(face_resized.getUMat(ACCESS_READ), plabel, pconfidence);
                     LOG.info("Prediction confidence {}", pconfidence[0]);
                     // And finally write all we've found out to the original image!
                     // First of all draw a green rectangle around the detected face:
@@ -163,12 +162,11 @@ public class FaceRecognizerInVideo implements Runnable {
 
                     String box_text;
                     Mat label;
-                    Person person;
 
                     int personID = plabel[0];
                     double confidence = pconfidence[0];
 
-                    if (personID == -1) {
+                    if (personID == 0) {
                         label = new Mat(new int[]{++counter});
                         LOG.info("New face ... stat: {}", counter);
                     } else {
@@ -202,7 +200,7 @@ public class FaceRecognizerInVideo implements Runnable {
 
                     // Create a simple string .. repeat the word face n times
 
-                    String face = Joiner.on(" ").join(Iterables.limit(Iterables.cycle("face"), faces.limit()));
+                    String face = Joiner.on(" ").join(Iterables.limit(Iterables.cycle("face"), (int) faces.limit()));
                     //System.out.println(face);
                     jmsTemplate.convertAndSend("input", face);
                 }
