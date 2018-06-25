@@ -29,7 +29,7 @@ public class ImageController {
     @RequestMapping("/images/{id}")
     public String greeting(@PathVariable("id") int id, Model model) {
 
-        model.addAttribute("person", personRepository.findOne(id));
+        model.addAttribute("person", personRepository.findById(id).orElse(null));
         return "faces";
     }
 

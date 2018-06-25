@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+import java.util.Optional;
+
 import static org.bytedeco.javacpp.opencv_imgcodecs.imencode;
 
 
@@ -30,14 +32,14 @@ public class PersonService {
         byte[] outputBuffer = new byte[(int) outputPointer.limit()];
         outputPointer.get(outputBuffer);
 
-        Person person;
-        if (personRepository.exists(personID)) {
-            person = personRepository.findOne(personID);
-        } else {
-            person = new Person();
-            person.setName("Someone " + counter);
-            person.setId(counter);
-        }
+        Optional<Person> dbperson = personRepository.findById(personID);
+
+        Person person = dbperson.orElseGet(() -> {
+            Person newPerson = new Person();
+            newPerson.setName("Someone " + counter);
+            newPerson.setId(counter);
+            return newPerson;
+        });
 
         if(confidence > 20) {
             person.getImages().add(new FaceImage(outputBuffer));

@@ -60,7 +60,7 @@ public class FlinkJMSStreamSink extends RichSinkFunction<Tuple2<String, Integer>
     }
 
     @Override
-    public void invoke(Tuple2<String, Integer> value) throws Exception {
+    public void invoke(Tuple2<String, Integer> value, Context context) throws Exception {
 
         SimpleMessage simpleMessage = new SimpleMessage(value.f0, value.f1);
         StringWriter stringWriter = new StringWriter();

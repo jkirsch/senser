@@ -2,10 +2,10 @@
   "name": "stream-sample",
   "version": "0.0.1-SNAPSHOT",
   "dependencies": {
-    "angular": "~1.5.9",
-    "angular-animate": "~1.5.9",
+    "angular": "~1.5.11",
+    "angular-animate": "~1.5.11",
     "angular-chart.js": "1.1.1",
-    "AngularJS-Toaster": "2.1.0",
+    "AngularJS-Toaster": "2.2.0",
     "sockjs-client": "~1.1.1",
     "stomp-websocket": "~2.3.4",
     "zodiac": "https://github.com/indus/zodiac.git",
@@ -24,6 +24,6 @@
     }
   },
   "resolutions": {
-    "angular": "1.5.9"
+    "angular": "1.5.11"
   }
 }
